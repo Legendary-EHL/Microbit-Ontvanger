@@ -1,0 +1,40 @@
+radio.onReceivedValue(function (name, value) {
+    if (name.compare("x") == 0) {
+        LinksRechts = value
+    } else if (name.compare("y") == 0) {
+        VoorAchter = value
+    }
+})
+let M2 = 0
+let VoorAchter = 0
+let LinksRechts = 0
+radio.setGroup(9)
+let richting = 0
+let xpositie = 0
+let ypositie = 0
+LinksRechts = 0
+VoorAchter = 0
+basic.forever(function () {
+    basic.showLeds(`
+        . . . . .
+        . . # . .
+        . # # # .
+        . . # . .
+        . . . . .
+        `)
+})
+basic.forever(function () {
+    let M1 = 0
+    M2 = LinksRechts + VoorAchter
+    M2 = -1 * (LinksRechts + VoorAchter)
+    if (M1 >= 0) {
+        maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, M1)
+    } else {
+        maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, Math.abs(M1))
+    }
+    if (M2 >= 0) {
+        maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, M2)
+    } else {
+        maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, Math.abs(M2))
+    }
+})
